@@ -1,0 +1,43 @@
+C:\Users\vaz64\Downloads\trabalho-final-eng-software\back-end
+├── auth-service
+│   └── src\main\java\com\condovote
+│       └── auth
+│           ├── config
+│           ├── controller
+│           ├── dto
+│           ├── filter
+│           ├── model
+│           ├── repository
+│           └── service
+│
+├── cadastro-service          <-- microserviço para cadastros (titulares, procuradores, unidades etc.)
+│   └── src\main\java\com\condovote\cadastro
+│       ├── config            <-- Spring config, CORS, segurança básica (validação JWT)
+│       ├── controller        <-- APIs: titulares, procuradores, lotes, casas, relação casa-lote
+│       ├── dto               <-- DTOs de entrada/saída
+│       ├── model             <-- entidades JPA ligadas ao banco de CADASTRO
+│       ├── repository        <-- interfaces Spring Data JPA
+│       └── service           <-- regras de negócio de cadastro e adimplência
+│
+├── votacao-service           <-- microserviço principal de votação (Producer: escreve na fila)
+│   └── src\main\java\com\condovote\votacao
+│       ├── config            <-- config de segurança (JWT), RabbitMQ producer, etc.
+│       ├── controller        <-- APIs: criar votações (admin), listar votações, votar, histórico da unidade
+│       ├── dto               <-- DTOs de votações, opções, pedidos de voto
+│       ├── model             <-- entidades ligadas a votação (lado CADASTRO, se precisar)
+│       ├── repository        <-- se esse serviço também ler/gravar em CADASTRO
+│       └── service           <-- regras de votação: validações, envio de mensagens para a fila
+│
+├── apuracao-worker           <-- microserviço Consumer (Worker) que lê RabbitMQ e grava no banco de APURAÇÃO
+│   └── src\main\java\com\condovote\apuracao
+│       ├── config            <-- config RabbitMQ consumer, conexão com banco APURAÇÃO
+│       ├── listener          <-- classes @RabbitListener para consumir mensagens de voto
+│       ├── model             <-- entidades APURAÇÃO (VotoRaw, VotoVigente, ResultadoVotacao)
+│       ├── repository        <-- Spring Data JPA para banco APURAÇÃO
+│       └── service           <-- processamento de voto, cálculo de peso, atualização de resultado
+│
+└── common-lib                <-- opcional: módulo para classes compartilhadas
+    └── src\main\java\com\condovote\common
+        ├── dto               <-- DTOs comuns (ex.: dados básicos do usuário autenticado)
+        ├── security          <-- utilidades para validar JWT entre serviços
+        └── exception         <-- exceções e handlers comuns
