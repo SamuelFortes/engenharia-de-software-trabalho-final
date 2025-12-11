@@ -1,14 +1,14 @@
 C:\Users\vaz64\Downloads\trabalho-final-eng-software\back-end
 ├── auth-service
 │   └── src\main\java\com\condovote
-│       └── auth
-│           ├── config
-│           ├── controller
-│           ├── dto
-│           ├── filter
-│           ├── model
-│           ├── repository
-│           └── service
+│       └── auth_service  <-- CORRIGIDO: Agora alinhado com o nome do microserviço e classe principal
+│           ├── config        <-- SecurityConfig
+│           ├── controller    <-- AuthController
+│           ├── dto           <-- LoginRequest, AuthResponse, etc.
+│           ├── filter        <-- JwtAuthenticationFilter
+│           ├── model         <-- Usuario, Titular, VinculoProcurador
+│           ├── repository    <-- Interfaces JPA (ex: UsuarioRepository)
+│           └── service       <-- AuthService, JwtService, SecurityContextUtils
 │
 ├── cadastro-service          <-- microserviço para cadastros (titulares, procuradores, unidades etc.)
 │   └── src\main\java\com\condovote\cadastro
